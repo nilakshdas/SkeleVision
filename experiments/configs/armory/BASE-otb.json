@@ -1,0 +1,54 @@
+{
+    "_description": "OTB video tracking",
+    "adhoc": null,
+    "attack": {
+        "knowledge": "white",
+        "kwargs": {
+            "batch_size": 1,
+            "max_iter": 100,
+            "step_size": 0.1,
+            "verbose": true
+        },
+        "module": "armory.art_experimental.attacks.carla_adversarial_texture",
+        "name": "AdversarialPhysicalTexture",
+        "use_label": true
+    },
+    "dataset": {
+        "batch_size": 1,
+        "eval_split": "human",
+        "framework": "numpy",
+        "module": "skelevision.data.armory.otb",
+        "name": "otb_patch_tracking"
+    },
+    "defense": null,
+    "metric": {
+        "means": true,
+        "perturbation": "l0",
+        "record_metric_per_sample": false,
+        "task": ["video_tracking_mean_iou"]
+    },
+    "model": {
+        "fit": false,
+        "fit_kwargs": {},
+        "model_kwargs": {
+            "cfg_path": "skelevision://experiments/configs/tuning/BASE-finetuning.yaml"
+        },
+        "module": "skelevision.models.art_model",
+        "name": "get_art_model",
+        "weights_file": null,
+        "wrapper_kwargs": {}
+    },
+    "scenario": {
+        "kwargs": {},
+        "module": "armory.scenarios.carla_video_tracking",
+        "name": "CarlaVideoTracking"
+    },
+    "sysconfig": {
+        "docker_image": null,
+        "external_github_repo": null,
+        "gpus": "all",
+        "output_dir": null,
+        "output_filename": null,
+        "use_gpu": true
+    }
+}

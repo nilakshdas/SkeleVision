@@ -1,0 +1,8 @@
+adversarial/*
+!adversarial/.keep
+
+models/*
+!models/.keep
+
+configs/*/*
+!configs/*/BASE-*

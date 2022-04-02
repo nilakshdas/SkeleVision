@@ -1,0 +1,85 @@
+META_ARC: "siamrpn_alex_dwxcorr"
+
+BACKBONE:
+  TYPE: "alexnet"
+  KWARGS:
+    width_mult: 1.0
+
+ADJUST:
+  ADJUST: False
+
+RPN:
+  TYPE: "DepthwiseRPN"
+  KWARGS:
+    anchor_num: 5
+    in_channels: 256
+    out_channels: 256
+
+KEYPOINT:
+  TYPE: "ModularConvDeconvInterpKeypointHead"
+  KWARGS:
+    in_channels: 256
+    conv_kwargs:
+      - out_channels: 128
+      - out_channels: 64
+    deconv_kwargs:
+      - out_channels: 17
+    output_size: [127, 127]
+
+MASK:
+  MASK: False
+
+ANCHOR:
+  STRIDE: 8
+  RATIOS: [0.33, 0.5, 1, 2, 3]
+  SCALES: [8]
+  ANCHOR_NUM: 5
+
+MODEL_BUILDER:
+  WEIGHTS_PATH: "skelevision://experiments/models/pretrained/siamrpn_alex_dwxcorr.pth"
+  USE_TEMPLATE_KEYPOINTS: True
+
+DATASET:
+  NAMES:
+    - "coco"
+    - "lasot-person"
+
+  TEMPLATE:
+    SHIFT: 4
+    SCALE: 0.05
+    BLUR: 0.0
+    FLIP: 0.0
+    COLOR: 1.0
+
+  SEARCH:
+    SHIFT: 64
+    SCALE: 0.18
+    BLUR: 0.2
+    FLIP: 0.0
+    COLOR: 1.0
+
+  NEG: -1.0
+  GRAY: 0.0
+
+TRAIN:
+  BATCH_SIZE: 256
+  OUTPUT_SIZE: 17
+  BASE_LR: 0.0008
+  CLS_WEIGHT: 1.
+  LOC_WEIGHT: 1.2
+  KEYPOINT_WEIGHT: 1.0
+  GAMMA: 0.95
+
+TRAINER:
+  KWARGS:
+    max_epochs: 50
+
+TRACK:
+  TYPE: "SiamRPNTracker"
+  PENALTY_K: 0.16
+  WINDOW_INFLUENCE: 0.40
+  LR: 0.30
+  EXEMPLAR_SIZE: 127
+  INSTANCE_SIZE: 287
+  BASE_SIZE: 0
+  CONTEXT_AMOUNT: 0.5
