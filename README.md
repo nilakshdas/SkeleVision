@@ -1,4 +1,7 @@
-# SkeleVisionTracking
+# SkeleVision
+
+> [**SkeleVision: Towards Adversarial Resiliency of Person Tracking with Multi-Task Learning**](https://arxiv.org/abs/2204.00734)  
+> Nilaksh Das, Sheng-Yun Peng, Duen Horng Chau
 
 ## Quickstart
 
@@ -106,3 +109,16 @@ $ CUDA_VISIBLE_DEVICES=0,1,2,3 make \
 > NOTE: If you have not downloaded the training data and the pre-trained model,
 > or trained the model being attacked, running the above examples
 > will do all of that before performing the adversarial attack.
+
+## Citation
+
+```
+@misc{das2022skelevision,
+      title={SkeleVision: Towards Adversarial Resiliency of Person Tracking with Multi-Task Learning}, 
+      author={Nilaksh Das and Sheng-Yun Peng and Duen Horng Chau},
+      year={2022},
+      eprint={2204.00734},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
